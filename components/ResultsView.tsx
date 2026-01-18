@@ -116,7 +116,7 @@ const ResultsView: React.FC<ResultsViewProps> = ({
             <DownloadCloud size={20} /> Simpan Semua
           </button>
         </div>
-        <div className="flex flex-col gap-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"> {/* Changed to grid layout */}
           {imagesToDisplay.map((img, idx) => (
             <div key={idx} className="group relative rounded-[4rem] overflow-hidden border border-gray-100 bg-white shadow-2xl transition-all duration-700 hover:-translate-y-2 flex flex-col">
               <div className="relative aspect-auto min-h-[400px]">

@@ -45,12 +45,12 @@ const FeatureForm: React.FC<FeatureFormProps> = ({
     images: [], modelPhotos: [], backgroundImages: [], logoPhotos: [] 
   });
 
-  // Fix: Changed key type from keyof FormData to string to match how it's called from MultiFileUpload
+  // Fix: Explicitly type 'file' as 'File' to ensure 'name' property is recognized and resolve the 'unknown' type issue.
   const handleFilesChange = async (key: string, e: React.ChangeEvent<HTMLInputElement>) => {
     const files = Array.from(e.target.files || []);
     if (files.length === 0) return;
 
-    const readPromises = files.map(file => new Promise<string>((res) => {
+    const readPromises = files.map((file: File) => new Promise<string>((res) => {
       const r = new FileReader();
       // Ensure r.result is a string before resolving the promise
       r.onloadend = () => {
@@ -58,7 +58,7 @@ const FeatureForm: React.FC<FeatureFormProps> = ({
           res(r.result);
         } else {
           console.error("FileReader result was not a string for", file.name, r.result);
-          res(''); // Resolve with empty string as a safe fallback
+          res(''); // This 'res('')' is a string and does not relate to Blob.
         }
       };
       r.readAsDataURL(file);
