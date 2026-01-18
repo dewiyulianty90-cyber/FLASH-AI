@@ -52,7 +52,15 @@ const FeatureForm: React.FC<FeatureFormProps> = ({
 
     const readPromises = files.map(file => new Promise<string>((res) => {
       const r = new FileReader();
-      r.onloadend = () => res(r.result as string); // r.result is a Data URL string
+      // Ensure r.result is a string before resolving the promise
+      r.onloadend = () => {
+        if (typeof r.result === 'string') {
+          res(r.result);
+        } else {
+          console.error("FileReader result was not a string for", file.name, r.result);
+          res(''); // Resolve with empty string as a safe fallback
+        }
+      };
       r.readAsDataURL(file);
     }));
     const newResults = await Promise.all(readPromises);

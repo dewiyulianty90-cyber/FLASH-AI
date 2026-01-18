@@ -128,16 +128,7 @@ const ResultsView: React.FC<ResultsViewProps> = ({
                 <div className="absolute top-8 left-8 bg-black/90 backdrop-blur-md px-5 py-2.5 rounded-2xl text-[10px] text-white font-black uppercase tracking-widest shadow-2xl border border-white/20">Result {idx+1}</div>
               </div>
               
-              {/* ✨ Per-Visual Individual Editor for Ads Creative */}
-              {type === 'ads-creative' && !data.featureData.noText && (
-                <IndividualEditor 
-                  initialHook={adsHook} 
-                  initialBody={adsBody} 
-                  initialCTA={adsCTA} 
-                  index={idx}
-                  onReGenerateIndividual={onReGenerateIndividual}
-                />
-              )}
+              {/* Removed ✨ Per-Visual Individual Editor for Ads Creative as per user request */}
             </div>
           ))}
         </div>
